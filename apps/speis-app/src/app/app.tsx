@@ -6,6 +6,7 @@ import { ReactComponent as Logo } from './logo.svg';
 import star from './star.svg';
 
 import { Route, Link } from 'react-router-dom';
+import { PageTitle } from '@speis/ui-header';
 
 const StyledApp = styled.div`
   /*
@@ -148,6 +149,7 @@ export const App = () => {
    */
   return (
     <StyledApp>
+      <PageTitle />
       <header className="flex">
         <Logo width="75" height="75" />
         <h1>Welcome to speis-app!</h1>
