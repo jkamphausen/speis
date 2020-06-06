@@ -12,7 +12,7 @@ const StyledPageTitle = styled.div`
 export const PageTitle = (props: PageTitleProps) => {
   return (
     <StyledPageTitle>
-      <h1>Welcome to page-title!</h1>
+      <h1>Welcome to Speis [🥩🍍🥫]</h1>
     </StyledPageTitle>
   );
 };

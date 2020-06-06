@@ -1,17 +1,36 @@
-import { API_URL, ApiResponse } from '@speis/api-interface'
+import { Food } from '@speis/api-interface'
 import { ApolloServer, gql } from 'apollo-server-express'
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
   type Query {
     message: String
+    foods: [Food]
+  }
+
+  type Food {
+    name: String
+    amount: Int
+    location: String
+  }
+
+  type FoodList {
+    foods: [Food]
   }
 `;
+
+const DATA: Food[] = [
+  { name: 'Banán', amount: '3', location: 'Unten' },
+  { name: 'Pilze', amount: '1', location: 'Oben' },
+  { name: 'Gehackte Tonaten', amount: '2', location: 'Unten' },
+  { name: 'Ravioli', amount: '4', location: 'Oben' },
+];
 
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
     message: () => 'Welcome to api!',
+    foods: () => DATA
   },
 };
 
@@ -31,14 +50,3 @@ app.listen({ port: 4000 }, () =>
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
 );
 
-/*
-app.get(API_URL, (req, res) => {
-  res.send({ message: 'Welcome to api!' } as ApiResponse);
-});
-
-const port = process.env.port || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
-});
-server.on('error', console.error);
-*/

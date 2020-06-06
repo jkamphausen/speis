@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import { Route, Link } from 'react-router-dom';
 import { PageTitle } from '@speis/ui-header';
-import { API_URL, ApiResponse } from '@speis/api-interface'
 import styled from 'styled-components';
 
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from "apollo-boost";
 
-const MESSAGE = gql`
+const FOODS = gql`
   {
-    message
+    foods {
+      name
+      amount
+      location
+    }
   }
 `;
 
@@ -22,35 +24,31 @@ const AppBody = styled.div`
 
 export const App = () => {
 
-  const { loading, error, data } = useQuery(MESSAGE);
+  const { loading, error, data } = useQuery(FOODS);
 
-  /* const [apiResponse, setApiResponse] = useState<ApiResponse>({ message: 'Loading...' });
-  useEffect(() => {
-    fetch(API_URL).then(r => r.json()).then(setApiResponse);
-  }, []) */
-
-
-  function message() {
+  function displayFoods() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
-    return <p>{data.message}</p>;
+
+    return <ul>{data.foods.map(food => <li key={food.name+Date.now()}>{food.amount} x {food.name} ({food.location})</li>) }</ul>
   }
 
   return (
-      <AppBody>
-        <header>
-          <PageTitle />
-        </header>
+    <AppBody>
+      <header>
+        <PageTitle />
+      </header>
 
-        <main>
-          {/*apiResponse.message*/}
-          {message()}
-        </main>
+      <br />
+      <hr />
+      <br />
 
-        {/* START: routes */}
-        <br />
-        <hr />
-        <br />
+      <main>
+        {displayFoods()}
+      </main>
+
+      {/* START: routes */}
+      { /*
         <div role="navigation">
           <ul>
             <li>
@@ -80,8 +78,10 @@ export const App = () => {
             </div>
           )}
         />
-        {/* END: routes */}
-      </AppBody>
+
+      */}
+      {/* END: routes */}
+    </AppBody>
   );
 };
 
