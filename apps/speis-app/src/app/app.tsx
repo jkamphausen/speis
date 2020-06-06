@@ -7,6 +7,7 @@ import star from './star.svg';
 
 import { Route, Link } from 'react-router-dom';
 import { PageTitle } from '@speis/ui-header';
+import { API_URL, ApiResponse } from '@speis/api-interface'
 
 const StyledApp = styled.div`
   /*
@@ -143,9 +144,9 @@ const StyledApp = styled.div`
 
 export const App = () => {
 
-  const [apiResponse, setApiResponse] = useState({ message: 'Loading...' });
+  const [apiResponse, setApiResponse] = useState<ApiResponse>({ message: 'Loading...' });
   useEffect(() => {
-    fetch('/api').then(r => r.json()).then(setApiResponse);
+    fetch(API_URL).then(r => r.json()).then(setApiResponse);
   }, [])
 
   /*
