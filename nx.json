@@ -25,6 +25,9 @@
     "speis-app-e2e": {
       "tags": [],
       "implicitDependencies": ["speis-app"]
+    },
+    "ui-header": {
+      "tags": []
     }
   }
 }
