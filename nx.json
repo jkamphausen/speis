@@ -18,5 +18,13 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "speis-app": {
+      "tags": []
+    },
+    "speis-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["speis-app"]
+    }
+  }
 }
